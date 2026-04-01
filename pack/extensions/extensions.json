@@ -1,0 +1,14 @@
+{
+    "_instructions": "Set any extension to true to activate it. The agent handles the rest. You can also just ask the agent to activate an extension for you - no need to edit this file manually.",
+    "setup-package-manager": "pending",
+    "beads-workflow": false,
+    "notebooklm-research": false,
+    "orbit-planning": false,
+    "cloudflare-mcp": false,
+    "firecrawl": false,
+    "minibook-pipeline": false,
+    "notion-publishing": false,
+    "autorag-pipeline": false,
+    "web-blog": false,
+    "google": false
+}
