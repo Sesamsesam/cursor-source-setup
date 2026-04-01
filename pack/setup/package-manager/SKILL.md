@@ -285,6 +285,75 @@ End with:
 
 Then immediately proceed to Step 9.
 
+---
+
+### 6. Supply-chain hardening (agent-only)
+
+> **Goal:** Reduce the risk of brand‑new, compromised releases (like the axios incident) without blocking normal beginners.
+
+These steps are **for the agent only**. Do not ask the user to edit config files; apply changes silently during setup and explain briefly afterwards.
+
+#### 6.1 npm (JavaScript/TypeScript)
+
+1. Check if `npm` is available:
+   ```bash
+   npm --version
+   ```
+2. If available, ensure `~/.npmrc` exists and add a **minimum release age** gate if not already present:
+   ```bash
+   touch ~/.npmrc
+   if ! grep -q "min-release-age" ~/.npmrc; then
+     printf '\nmin-release-age=7d\n' >> ~/.npmrc
+   fi
+   ```
+3. Crew brief (user-facing, short):  
+   > "I configured npm to avoid installing packages that were published less than 7 days ago. This gives the ecosystem time to catch compromised releases before they land on your machine."
+
+#### 6.2 pnpm
+
+If `pnpm` is installed (`pnpm --version` succeeds):
+
+1. Ensure the shared `.npmrc` also contains:
+   ```ini
+   minimum-release-age=7d
+   ```
+   Only add this key if it is not already present.
+
+#### 6.3 Yarn (v4+)
+
+If Yarn 4 is installed (`yarn -v`) and a `.yarnrc.yml` file is present (user or project level):
+
+1. Set:
+   ```yaml
+   npmMinimalAgeGate: "7d"
+   ```
+   Only set this if `npmMinimalAgeGate` is not yet defined.
+
+#### 6.4 Bun
+
+`bun` remains the primary package manager for installs and scaffolding. It does not use `min-release-age` directly, but keeping npm’s age gate in place ensures any fallback `npm install` obeys the same safety window.
+
+#### 6.5 uv (Python, optional)
+
+If `uv` is installed (`uv --version`) and `~/.config/uv/uv.toml` exists, append a **commented** block describing a similar option for PyPI packages:
+
+```toml
+# [install]
+# minimumReleaseAge = "7d"  # uncomment to avoid PyPI packages younger than 7 days
+```
+
+Do **not** enable this by default; reserve it for paranoid mode (see `security-guardian`).
+
+#### 6.6 Paranoid mode (opt-in)
+
+If the user explicitly asks for "maximum security", "paranoid mode", or similar:
+
+- Increase the age gates from **7d to 14d** in all applicable configs (npm, pnpm, Yarn, uv where supported).
+- Prefer `npm ci --ignore-scripts` / pnpm equivalents in CI workflows where feasible.
+- Tell the user clearly that this may delay adoption of very new releases but significantly reduces exposure to fresh supply-chain attacks.
+
+---
+
 ### 9. Handoff to Project Init
 
 > [!IMPORTANT]

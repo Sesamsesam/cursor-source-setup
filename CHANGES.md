@@ -16,6 +16,7 @@ Read this before committing changes to **this** repository. Each change can ripp
 | **User extension paths changed** | `liftoff-lifecycle` Skill Creation, `init-project.md` symlinks, install/update scripts, `README.md` |
 | **MCP path documentation** | Every `SETUP.md` that references `~/.cursor/mcp.json` — verify against current Cursor docs |
 | **README clone URL / agent comments** | Top-of-file `README.md` HTML comments for agents; canonical `github.com/Sesamsesam/cursor-source-setup` |
+| **Security tools docs (Socket)** | `pack/skills/security-guardian/SKILL.md`, `pack/extensions/security-tools/SKILL.md`, `pack/extensions/extensions.json` entry if added |
 
 ## Global install layout (reference)
 

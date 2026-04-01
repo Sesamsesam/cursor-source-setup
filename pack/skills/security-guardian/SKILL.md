@@ -125,6 +125,15 @@ Run `bun audit` or `npm audit` before every deployment.
 - Critical/High vulnerabilities must be resolved before shipping
 - Document any accepted risks with a comment explaining why
 
+### 8.1 Supply-Chain Hygiene (npm, pnpm, Yarn, Bun)
+
+- Always commit lockfiles (`package-lock.json`, `pnpm-lock.yaml`, `yarn.lock`) so installs pin to exact versions **and integrity hashes**, not just semver ranges.
+- Prefer pinned versions or lockfiles over loose ranges like `^1.0.0` without a lockfile — ranges alone can pick up compromised releases until the registry/yours tools react.
+- Respect the **minimum release age** settings configured by `setup-package-manager`:
+  - Default: packages younger than **7 days** are not installed automatically.
+  - Paranoid mode: this window may be raised to **14 days** on request.
+- When installing without a lockfile, evaluate new dependencies carefully (downloads, maintainers, last publish date); warn the user if a high‑risk pattern is detected.
+
 ### 9. Log Safety
 - Redact tokens before logging - show only last 4 chars: `sk-...a1b2`
 - Never log full request bodies that may contain passwords
@@ -157,6 +166,10 @@ Before installing any package:
 - Name exactly correct? (`lodash` not `1odash`)
 - Check last publish date - abandoned packages may have vulnerabilities
 
+If the user mentions a new supply-chain incident (e.g., a compromised npm package), the agent should:
+- Search the user’s global environment and current project for the affected package/version.
+- If found, guide through rotating relevant secrets, cleaning affected projects, and checking CI logs, using the incident’s advisory as ground truth.
+
 ### 13. Error Handling (Security Angle)
 - Never "fail open" - if auth check errors, DENY access
 - User-facing errors: generic ("Something went wrong")
@@ -170,6 +183,22 @@ Before installing any package:
 - When generating auth code, always check identity first
 - Never suggest `eval()`, `innerHTML`, or `dangerouslySetInnerHTML` without sanitization
 - When suggesting env vars, always mention `.env` + `.gitignore`
+
+---
+
+## Optional Advanced Tools (Socket)
+
+These tools are **never** installed or enabled automatically. They are reserved for users who explicitly ask for deeper supply-chain protection and are comfortable managing extra tooling.
+
+- **Socket for GitHub (app)**: Adds PR-level checks for risky dependencies (suspicious behavior, sudden new deps, typosquats).
+- **Socket Firewall (desktop)**: Monitors outbound network behavior from tools (e.g., `npm install`) on the developer machine.
+
+Agent rules:
+- Do **not** suggest these to non-technical beginners unless they mention them by name.
+- When a user asks about CI/dev-machine supply-chain hardening or mentions Socket, explain what these tools do and offer to:
+  - Walk them through installing the GitHub app for selected repos, or
+  - Point them to Socket Firewall docs for their OS.
+- Never attempt to install or configure these tools without an explicit, informed user request.
 
 <!-- ═══════════════════════════════════════════════════ -->
 <!-- REFERENCE                                          -->

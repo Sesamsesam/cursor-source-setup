@@ -77,7 +77,7 @@ Users - especially beginners - often describe features without knowing the techn
 | **Backend** | Convex | Reactive, real-time, type-safe, serverless |
 | **Auth** | Clerk | Drop-in authentication with social logins, MFA |
 | **Hosting** | Cloudflare Pages | Edge deployment, preview URLs per branch |
-| **Package Manager** | bun (preferred) / pnpm (fallback) | Fast installs, no npm |
+| **Package Manager** | bun (preferred) / pnpm (fallback) / npm (last resort) | Fast installs, no npm by default |
 
 ### Static Sites (Marketing, portfolios, landing pages)
 
@@ -155,3 +155,15 @@ export default defineSchema({
 - **Env vars:** Always in `.env.local`, never committed
 - **TypeScript:** Strict mode, always
 - **Imports:** Absolute paths via `tsconfig.json` paths (`@/features/auth`)
+
+---
+
+## Package Manager Priority (Agent Guidance)
+
+- **Primary:** Use **bun** for scaffolding (`bunx`) and dependency installs (`bun install`) whenever available.
+- **Fallback:** If bun is unavailable or the user explicitly prefers it, use **pnpm** for installs.
+- **npm:** Only use `npm` when:
+  - A tool or script explicitly requires `npm`/`npx`, or
+  - Neither bun nor pnpm is installed and the user does not want to install additional tools.
+
+When a README suggests `npm install ...`, prefer to translate this into the bun/pnpm equivalent for projects created with this stack, and mention that translation to the user.
