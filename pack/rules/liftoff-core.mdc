@@ -41,3 +41,21 @@ alwaysApply: true
 - Session start, extension toggles, init-project, auto-update, skill creation: read the **`liftoff-lifecycle`** skill (`~/.cursor/skills/liftoff-lifecycle/SKILL.md`)
 - Full methodology: `forge-methodology`, `git-flow`, `brand-identity`, `stack-pro-max`, `security-guardian`, `error-handling`
 - Creating new skills: **`cursor-standard`** skill
+
+## Explicit Liftoff command and paths
+
+- When the user says **"liftoff"**, the agent MUST:
+  - Read `~/.cursor/skills/liftoff-lifecycle/SKILL.md` and follow the **Session Start** and **Project Directory Convention** sections
+  - If `setup-package-manager` is `"done"` in `~/.cursor/liftoff/extensions/extensions.json`, execute `~/.cursor/liftoff/workflows/init-project.md`
+  - If `setup-package-manager` is `"pending"`, execute `~/.cursor/liftoff/setup/package-manager/SKILL.md` instead, then rerun `liftoff`
+- Core Cursor skills live at:
+  - `~/.cursor/skills/forge-methodology/SKILL.md`
+  - `~/.cursor/skills/git-flow/SKILL.md`
+  - `~/.cursor/skills/brand-identity/SKILL.md`
+  - `~/.cursor/skills/stack-pro-max/SKILL.md`
+  - `~/.cursor/skills/security-guardian/SKILL.md`
+  - `~/.cursor/skills/error-handling/SKILL.md`
+  - `~/.cursor/skills/cursor-standard/SKILL.md`
+- Liftoff extensions live under:
+  - Package extensions: `~/.cursor/liftoff/extensions/<name>/SKILL.md`
+  - User-created extensions (override package extensions with the same `<name>`): `~/.cursor/liftoff/user-extensions/<name>/SKILL.md`
