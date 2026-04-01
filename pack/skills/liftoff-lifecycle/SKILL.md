@@ -182,10 +182,9 @@ During regular project work, when the agent leverages a Liftoff core skill (FORG
      ```
   4. If the `.liftoff-source` file does not exist but `~/.cursor/liftoff/rules/liftoff-core.mdc` exists, the user installed Liftoff but source tracking is missing. Clone **this** Cursor Source Setup repo and record the path:
      ```bash
-     git clone https://github.com/sesamsesam/cursor-source-setup.git ~/.cursor/liftoff/scratch/cursor-source-setup
+     git clone https://github.com/Sesamsesam/cursor-source-setup.git ~/.cursor/liftoff/scratch/cursor-source-setup
      echo ~/.cursor/liftoff/scratch/cursor-source-setup > ~/.cursor/liftoff/.liftoff-source
      ```
-     (Replace the URL with the canonical public repo when published.)
   5. After update, tell the user in plain language what changed (new extensions, updated skills). For new extensions, explain what each one does in one sentence and note it's off by default. Tell them: "To turn one on, open `extensions.json` under `~/.cursor/liftoff/extensions/` and set it to `true`."
 - Check `~/.cursor/liftoff/extensions/extensions.json` for active extensions and pending setup tasks
 - **CRITICAL on first run:** If `setup-package-manager` is `"pending"`, the installation is NOT complete. Read `~/.cursor/liftoff/setup/package-manager/SKILL.md` and execute Steps 0 through 9 immediately. Do not do anything else until this is done.
