@@ -108,7 +108,6 @@ You never need to say "use FORGE" - the agent follows it automatically. Every fe
 
 **Actions:**
 - Document what was built, what worked, what didn't
-- If Beads active: `bd sync` to persist context
 - Update Knowledge Items if new patterns were discovered
 - Suggest improvements in three categories:
   - **S1 - Stability/Scalability**: Architectural improvements, better error recovery, load handling

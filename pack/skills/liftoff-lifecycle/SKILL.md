@@ -191,7 +191,6 @@ During regular project work, when the agent leverages a Liftoff core skill (FORG
 - If any `setup-*` entries are `"pending"`: read the matching `~/.cursor/liftoff/setup/*/SKILL.md`, execute it, then mark `"done"`
 - **Project init fallback**: If `setup-package-manager` is `"done"` and the current workspace has no `.cursor/.liftoff-init` file, the project has not been initialized by Liftoff yet. Read `~/.cursor/liftoff/workflows/init-project.md` and execute the workflow (see Project Directory Convention). This check ensures users who closed the window during the handoff or skipped it are not left stranded. Only trigger this once per session - do not loop. Note: a `.cursor/` directory might exist from other sources (e.g. cloned repos) — the `.liftoff-init` marker is the only reliable proof that init-project ran
 - **Extension health check**: For each extension set to `true` in `extensions.json`, verify setup completion if the extension has a `SETUP.md`. Check tool installations, MCP config entries, and auth status. If anything is missing, run the full setup sequence from the Activation Flow. This catches interrupted or partially completed setups.
-- If Beads active: run `bd ready` to find pending tasks
 - If ORBIT active and `orbit.md` exists: check it before starting work
 - If credential rotation tracking exists: check dates, warn if overdue
 - Check `.gitignore` includes `.env*` if project has a `.env` file

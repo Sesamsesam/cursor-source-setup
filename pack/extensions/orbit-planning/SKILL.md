@@ -152,19 +152,6 @@ orbit.md                   ->    referenced during Foundation phase
 - O.R.B.I.T. runs **once** at project start (revisited via Track)
 - F.O.R.G.E. runs **for every task** within the project
 
----
-
-## With Beads vs Without
-
-| | Without Beads | With Beads |
-|---|---|---|
-| **Within session** | Works perfectly | Works perfectly |
-| **Across sessions** | Agent re-reads `orbit.md` but loses the *why* behind pivots | `bd ready` loads full context including decision rationale |
-| **User effort** | May need to remind agent of recent changes | Zero re-explaining |
-
-> Beads is not required, but eliminates cross-session friction. Without it, `orbit.md` is your safety net.
-
----
 
 ## The `orbit.md` Template
 
